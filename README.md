@@ -12,3 +12,13 @@ Scripts for scraping affixes (suffixes, prefixes, roots) from Wikipedia & Wiktio
 ```bash
 pip install -r requirements.txt
 ```
+
+### Usage
+
+```bash
+# scrapes medical affixes
+make medical
+
+# scrapes English affixes
+make english
+```
