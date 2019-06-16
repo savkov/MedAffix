@@ -1,23 +1,9 @@
-# This file is part of MedAffix.
-#
-# MedAffix is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# MedAffix is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with MedAffix.  If not, see <http://www.gnu.org/licenses/>.
 __author__ = 'Aleksandar Savkov'
 
 import re
 import warnings
-import urllib2
-from BeautifulSoup import BeautifulSoup
+import requests
+from bs4 import BeautifulSoup
 from os import makedirs
 
 
@@ -33,14 +19,14 @@ def get_next_cat_page(soup, affix_type):
 
 
 def scrape_category(url, affix_type=None):
-    html = urllib2.urlopen(url).read()
-    soup = BeautifulSoup(html)
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, 'html.parser')
     next_url = get_next_cat_page(soup, affix_type) if affix_type else None
     atags = soup.findAll(name='a')
     affixes = [x['title']
                for x
                in atags
-               if x.has_key('title') and re.match('^[a-z-]+$', x['title'])]
+               if x.has_attr('title') and re.match('^[a-z-]+$', x['title'])]
     if next_url:
         affixes.extend(scrape_category(next_url, affix_type))
     return affixes

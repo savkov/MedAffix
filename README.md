@@ -1,8 +1,14 @@
 MedAffix
 ========
-A script that parses the Wikipedia page with medical affixes (suffixes, 
-prefixes, roots) and stores them in text files based on their type, and 
-a script that scrapes English affixes from Wiktionary.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Requirements
-* [pandas](http://pandas.pydata.org/)
+
+Scripts for scraping affixes (suffixes, prefixes, roots) from Wikipedia & Wiktionary:
+
+* `medaffix.py` -- scrapes medical affixes and stores them in text files based on their type
+* `wikiaffix.py` -- scrapes English affixes from Wiktionary
+
+### Requirements
+```bash
+pip install -r requirements.txt
+```
